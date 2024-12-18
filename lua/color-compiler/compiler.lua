@@ -31,7 +31,8 @@ end
 -- the result is then written to it's respective file
 --- @param theme string
 --- @param bg string
-M.compile = function(theme, bg, compile_path)
+M.compile = function(theme, bg)
+	local compile_path = vim.fn.stdpath("cache") .. "color-compiler/"
 	local lines = {
 		string.format(
 			[[
@@ -67,7 +68,7 @@ vim.g.colors_name = "%s"
 
 		print(fmt(
 			[[
-color-compiler (error): An Error occured during the compilation of theme: %s
+color-compiler (error): An Error occured during the compilation of the following theme: %s
 For further debugging check %s
 		  ]],
 			theme,
@@ -84,8 +85,8 @@ For further debugging check %s
 	end
 
 	local file = assert(
-		io.open(compile_path .. "/" .. theme, "wb"),
-		"Permission denied while writing compiled file to " .. compile_path .. "/" .. theme
+		io.open(compile_path .. theme, "wb"),
+		"Permission denied while writing compiled file to " .. compile_path .. theme
 	)
 	file:write(f())
 	file:close()
