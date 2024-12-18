@@ -32,17 +32,20 @@ end
 --- @param theme string
 --- @param bg string
 M.compile = function(theme, bg)
-	local compile_path = vim.fn.stdpath("cache") .. "color-compiler/"
+	local compile_path = vim.env.HOME .. "/.local/share/nvim/color-compiler/"
 	local lines = {
 		string.format(
 			[[
 return string.dump(function()
+print('we in here')
 vim.o.termguicolors = true
-if vim.g.colors_name then vim.cmd("hi clear") end
+if vim.g.colors_name then print('clearing highlights') vim.cmd("hi clear") end
 vim.o.background = "%s"
+print("setting name to " .. "%s")
 vim.g.colors_name = "%s"
 ]],
 			bg,
+			theme,
 			theme
 		),
 	}
@@ -50,11 +53,21 @@ vim.g.colors_name = "%s"
 	for group, hl in pairs(hl_groups) do
 		if hl.fg then
 			hl.fg = int_to_hex(hl.fg)
+		else
+			hl.fg = "NONE"
 		end
 		if hl.bg then
 			hl.bg = int_to_hex(hl.bg)
+		else
+			hl.bg = "NONE"
 		end
-		table.insert(lines, fmt([[vim.api.nvim_set_hl(0, "%s", %s]], group, inspect(hl)))
+		-- if hl.ctermfg then
+		-- 	hl.ctermfg = int_to_hex(hl.ctermfg)
+		-- end
+		-- if hl.ctermbg then
+		-- 	hl.ctermbg = int_to_hex(hl.ctermbg)
+		-- end
+		table.insert(lines, fmt([[vim.api.nvim_set_hl(0, "%s", %s)]], group, inspect(hl)))
 	end
 	table.insert(lines, "end, true)")
 
