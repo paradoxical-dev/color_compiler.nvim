@@ -6,6 +6,17 @@ local path = vim.env.HOME .. "/.local/share/nvim/color-compiler/"
 --- @param theme string
 M.load = function(theme)
 	local compiled_path = path .. theme
+	if not vim.loop.fs_stat(compiled_path) then
+		print(string.format(
+			[[
+	  color-compiler (error): Failed to load theme: %s from path %s
+	  Theme has not been compiled yet. Compile your current theme using the command `:ColorCompiler`
+			]],
+			theme,
+			compiled_path
+		))
+		return
+	end
 	local f = loadfile(compiled_path)
 	if not f then
 		print(string.format(

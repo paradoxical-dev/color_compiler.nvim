@@ -37,20 +37,20 @@ M.compile = function(theme, bg)
 		string.format(
 			[[
 return string.dump(function()
-print('we in here')
 vim.o.termguicolors = true
-if vim.g.colors_name then print('clearing highlights') vim.cmd("hi clear") end
+if vim.g.colors_name then vim.cmd("hi clear") end
 vim.o.background = "%s"
-print("setting name to " .. "%s")
 vim.g.colors_name = "%s"
 ]],
 			bg,
-			theme,
 			theme
 		),
 	}
 
 	for group, hl in pairs(hl_groups) do
+		if hl.link then
+			goto continue
+		end
 		if hl.fg then
 			hl.fg = int_to_hex(hl.fg)
 		else
@@ -67,6 +67,7 @@ vim.g.colors_name = "%s"
 		-- if hl.ctermbg then
 		-- 	hl.ctermbg = int_to_hex(hl.ctermbg)
 		-- end
+		::continue::
 		table.insert(lines, fmt([[vim.api.nvim_set_hl(0, "%s", %s)]], group, inspect(hl)))
 	end
 	table.insert(lines, "end, true)")
@@ -77,7 +78,7 @@ vim.g.colors_name = "%s"
 
 	local f = loadstring(table.concat(lines, "\n"))
 	if not f then
-		local err_path = (os.getenv("TMP") or "/tmp") .. "/color-compile_error.lua"
+		local err_path = (os.getenv("TMP") or "/tmp") .. "/color-compiler_error.lua"
 
 		print(fmt(
 			[[
@@ -95,6 +96,13 @@ For further debugging check %s
 		end
 		dofile(err_path)
 		return
+	end
+
+	local debug_path = (os.getenv("TMP") or "/tmp") .. "/color-compiler_logs.lua"
+	local debug = io.open(debug_path, "wb")
+	if debug then
+		debug:write(table.concat(lines, "\n"))
+		debug:close()
 	end
 
 	local file = assert(
