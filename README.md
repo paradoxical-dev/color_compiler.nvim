@@ -2,6 +2,10 @@
 
 A simple utility to precompile your current theme to improve startup times
 
+![startup w/o color-compiler](https://imgur.com/Abpgu2X)
+
+![color-compiler startup times](https://imgur.com/fO2473p)
+
 # Overview
 
 color-compiler is perfect for those who heavily modify their colorscheme, setting multiple custom overrides of highlight groups.
@@ -13,8 +17,6 @@ The goal of this plugin is to precompile your current theme to avoid the tax in 
 Although this feature is packaged in many popular plugins, such as [catppuccin](https://github.com/catppuccin/nvim) or [kanagawa](https://github.com/rebelot/kanagawa.nvim), this project allows any custom confiuration to be compiled and saved for later use.
 
 The code has been heavily based off of [catppuccin's implementation](https://github.com/catppuccin/nvim/blob/f8a155ab5891c5d2fb709b7e85627f1783d5a5d9/lua/catppuccin/lib/compiler.lua) and adapted to work with any currently set colorscheme
-
-Personally, the plugin dropped my time from a whopping 17ms at it's slowest and around 8ms on average to under 1ms at its fastest and no slower than 3ms.
 
 # Installation
 
