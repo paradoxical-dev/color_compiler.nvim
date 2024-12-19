@@ -2,9 +2,9 @@
 
 A simple utility to precompile your current theme to improve startup times
 
-![startup w/o color-compiler](https://imgur.com/Abpgu2X)
+![startup w/o color-compiler](https://imgur.com/3VVB9JL)
 
-![color-compiler startup times](https://imgur.com/fO2473p)
+![color-compiler startup times](https://imgur.com/FmK0LbX)
 
 # Overview
 
