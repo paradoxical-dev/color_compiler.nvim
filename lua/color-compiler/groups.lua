@@ -270,10 +270,29 @@ return {
   -- HARPOON --
   "HarpoonWindow",
   "HarpoonBorder",
+  -- HEIRLINE --
+  "HeirlineNormal",
+  "HeirlineVisual",
+  "HeirlineInsert",
+  "HeirlineCommand",
+  "HeirlineTerminal",
+  "HeirlineReplace",
+  "HeirlineInactive",
   -- ILLUMINATE --
   "IlluminatedWordRead",
   "IlluminatedWordText",
   "IlluminatedWordWrite",
+  -- LAZY --
+  "LazyNormal",
+  "LazyButton",
+  "LazyButtonActive",
+  "LazyReasonPlugin",
+  "LazyReasonSource",
+  "LazyReasonCmd",
+  "LazyReasonFt",
+  "LazySpecial",
+  "LazyCommit",
+  "LazyCommitType",
   -- LSP --
   "LspReferenceText",
   "LspReferenceRead",

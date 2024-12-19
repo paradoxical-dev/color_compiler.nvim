@@ -35,9 +35,7 @@ end
 --- @param bg string
 --- @param custom_groups? table
 M.compile = function(theme, bg, custom_groups)
-	if custom_groups then
-		table.deep_extend("force", group_names, custom_groups)
-	end
+	vim.tbl_deep_extend("keep", group_names, custom_groups or {})
 	local compile_path = vim.env.HOME .. "/.local/share/nvim/color-compiler/"
 	local lines = {
 		string.format(
