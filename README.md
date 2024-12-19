@@ -1,10 +1,10 @@
-# color_compiler.nvim
+# color-compiler.nvim
 
 A simple utility to precompile your current theme to improve startup times
 
 # Overview
 
-Color compiler is perfect for those who heavily modify their colorscheme, setting multiple custom overrides of highlight groups.
+color-compiler is perfect for those who heavily modify their colorscheme, setting multiple custom overrides of highlight groups.
 
 If this is you, you know that doing this comes with a price... *valuable milliseconds*
 
@@ -62,9 +62,7 @@ Simply have your theme setup to how you like and run the command. The compiled t
 The `load` function is used within the config of the plugin setup, passing in the desired theme name.
 
 > [!NOTE]
-> If the passed in name is not present in the cache directory, the current colorscheme will be compiled under this name.
-> 
-> In this case a restart of the editor will be required for the colorscheme to become active
+> If the passed in name is not present in the cache directory, the current colorscheme will be compiled under this name. In this case a restart of the editor will be required for the colorscheme to become active
 
 > [!TIP]
 > When configuring your desired theme, ensure this line is either removed or commented out
@@ -102,4 +100,4 @@ end
 > [!NOTE]
 > If a plugin you use is not supported and adding the custom groups to the command is too cumbersome, consider forking and creating a pull request.
 > 
-> Simply update [lua/color-compiler/groups.lua] with the desired groups and I will approve the PR asap
+> Simply update [groups.lua](lua/color-compiler/groups.lua) with the desired groups and I will approve the PR asap
