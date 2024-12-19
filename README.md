@@ -47,7 +47,7 @@ It takes 2 main arguments:
 
 Any further arguments will be passed as group names to include in the compiled theme.
 
-> [!HINT]
+> [!TIP]
 > If you need to include custom groups the bg argument cannot be omitted.
 
 **Example**
@@ -61,10 +61,13 @@ Simply have your theme setup to how you like and run the command. The compiled t
 
 The `load` function is used within the config of the plugin setup, passing in the desired theme name.
 
-> [!HINT]
+> [!NOTE]
 > If the passed in name is not present in the cache directory, the current colorscheme will be compiled under this name.
 > 
 > In this case a restart of the editor will be required for the colorscheme to become active
+
+> [!TIP]
+> When configuring your desired theme, ensure this line is either removed or commented out
 
 **Example**
 ```lua
@@ -99,4 +102,4 @@ end
 > [!NOTE]
 > If a plugin you use is not supported and adding the custom groups to the command is too cumbersome, consider forking and creating a pull request.
 > 
-> Simply update [[./lua/color-compiler/groups.lua]] with the desired groups and I will approve the PR asap
+> Simply update [lua/color-compiler/groups.lua] with the desired groups and I will approve the PR asap
