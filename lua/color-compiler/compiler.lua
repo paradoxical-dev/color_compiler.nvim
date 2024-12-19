@@ -3,6 +3,24 @@ local M = {}
 local fmt = string.format
 local hl_groups = vim.api.nvim_get_hl(0, {}) -- define all global highlight groups
 local group_names = require("color-compiler.groups")
+local terminal_colors = {
+	terminal_color_0 = vim.g.terminal_color_0,
+	terminal_color_1 = vim.g.terminal_color_1,
+	terminal_color_2 = vim.g.terminal_color_2,
+	terminal_color_3 = vim.g.terminal_color_3,
+	terminal_color_4 = vim.g.terminal_color_4,
+	terminal_color_5 = vim.g.terminal_color_5,
+	terminal_color_6 = vim.g.terminal_color_6,
+	terminal_color_7 = vim.g.terminal_color_7,
+	terminal_color_8 = vim.g.terminal_color_8,
+	terminal_color_9 = vim.g.terminal_color_9,
+	terminal_color_10 = vim.g.terminal_color_10,
+	terminal_color_11 = vim.g.terminal_color_11,
+	terminal_color_12 = vim.g.terminal_color_12,
+	terminal_color_13 = vim.g.terminal_color_13,
+	terminal_color_14 = vim.g.terminal_color_14,
+	terminal_color_15 = vim.g.terminal_color_15,
+}
 local used_groups = {}
 
 -- converts interger color value to hex
@@ -51,6 +69,10 @@ vim.g.colors_name = "%s"
 		),
 	}
 
+	for k, v in pairs(terminal_colors) do
+		table.insert(lines, fmt([[vim.g.%s = "%s"]], k, v))
+	end
+
 	for _, group in ipairs(group_names) do
 		if not hl_groups[group] or used_groups[group] then
 			goto continue
@@ -58,10 +80,6 @@ vim.g.colors_name = "%s"
 
 		local hl = hl_groups[group]
 		if hl.fg then
-			if type(hl.fg) ~= "number" then
-				print(hl.fg)
-				print(group)
-			end
 			hl.fg = int_to_hex(hl.fg)
 		else
 			hl.fg = "NONE"
