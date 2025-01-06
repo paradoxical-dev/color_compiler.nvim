@@ -97,7 +97,7 @@ Add the corresponding Extension Name to the extenstions key when calling the `se
 | LSP                | "lsp"                    |
 | mason              | "mason"                  |
 | neotest            | "neotest"                |
-| neo-tree           | "neotree"                |
+| neo-tree           | "neo-tree"                |
 | noice              | "noice"                  |
 | NormalNvim         | "normalnvim"             |
 | render-markdown    | "render-md"              |

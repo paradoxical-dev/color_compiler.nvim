@@ -13,7 +13,13 @@ M.config = {
 -- used to define desired plugins and load desired theme if it exists
 --- @param opts table
 M.setup = function(opts)
+	local extensions = opts.extensions or {}
+	opts.extensions = nil
+
 	M.config = vim.tbl_deep_extend("force", M.config, opts)
+
+	local updated_extensions = vim.list_extend(vim.deepcopy(M.config.extensions), extensions)
+	M.config.extensions = updated_extensions
 
 	-- validate config
 	if M.config.extensions and type(M.config.extensions) == "table" then
@@ -80,7 +86,7 @@ vim.api.nvim_create_user_command("ColorCompiler", function(opts)
 		return
 	end
 
-	require("color-compiler.compiler").compile(theme, bg, custom_groups)
+	require("color-compiler.compiler").compile(theme, bg, custom_groups, M.config.extensions)
 	print("Successfully compiled theme: " .. theme .. " into " .. path .. theme)
 end, {
 	nargs = "*",

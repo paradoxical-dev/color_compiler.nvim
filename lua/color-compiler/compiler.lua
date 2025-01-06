@@ -2,12 +2,11 @@ local M = {}
 
 local fmt = string.format
 local hl_groups = vim.api.nvim_get_hl(0, {}) -- define all global highlight groups
-local config = require("color-compiler.init").config
 
 local syntax = require("color-compiler.groups.syntax")
 local editor = require("color-compiler.groups.editor")
-local group_names = vim.list_extend(vim.deepcopy(syntax), editor)
--- local group_names = require('color-compiler.groups')
+local group_names = vim.list_extend(syntax, editor)
+
 local terminal_colors = {
 	terminal_color_0 = vim.g.terminal_color_0,
 	terminal_color_1 = vim.g.terminal_color_1,
@@ -56,15 +55,17 @@ end
 -- the result is then written to it's respective file
 --- @param theme string
 --- @param bg string
---- @param custom_groups? table
-M.compile = function(theme, bg, custom_groups)
-	vim.tbl_deep_extend("keep", group_names, custom_groups or {})
-	if config.extensions then
-		for _, ext in ipairs(config.extensions) do
-			local plugin = require("color-compiler.groups." .. ext)
-			vim.tbl_deep_extend("keep", group_names, plugin)
+--- @param custom_groups? table  -- user added groups from the command
+--- @param extensions table    -- thh plugin list passed in from configuration
+M.compile = function(theme, bg, custom_groups, extensions)
+	vim.list_extend(group_names, custom_groups or {})
+	if extensions then
+		for _, ext in ipairs(extensions) do
+			local plugin = require("color-compiler.groups.extenstions." .. ext)
+			vim.list_extend(group_names, plugin)
 		end
 	end
+
 	local compile_path = vim.env.HOME .. "/.local/share/nvim/color-compiler/"
 	local lines = {
 		string.format(
@@ -91,12 +92,16 @@ vim.g.colors_name = "%s"
 
 		local hl = hl_groups[group]
 		if hl.fg then
-			hl.fg = int_to_hex(hl.fg)
+			if type(hl.fg) == "number" then
+				hl.fg = int_to_hex(hl.fg)
+			end
 		else
 			hl.fg = "NONE"
 		end
 		if hl.bg then
-			hl.bg = int_to_hex(hl.bg)
+			if type(hl.bg) == "number" then
+				hl.bg = int_to_hex(hl.bg)
+			end
 		else
 			hl.bg = "NONE"
 		end
