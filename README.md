@@ -27,9 +27,9 @@ return {
     "paradoxical-dev/color-compiler.nvim",
     lazy = false,
     priority = 1000
-    config = function()
+    opts = {
       -- Check 'Usage' section
-    end
+    }
   }
 }
 ```
@@ -61,45 +61,54 @@ Simply have your theme setup to how you like and run the command. The compiled t
 
 ## Setup
 
-The `load` function is used within the config of the plugin setup, passing in the desired theme name.
+The main `setup` function is used to define the used plugins and their hl groups. See [Supported Plugins](#Supported-Plugins) for more information.
 
 > [!NOTE]
-> If the passed in name is not present in the cache directory, the current colorscheme will be compiled under this name. In this case a restart of the editor will be required for the colorscheme to become active
+> The plugin includes the following extenstions by default: cmp, treesitter, lsp
 
-> [!TIP]
-> When configuring your desired theme, ensure this line is either removed or commented out
+The desired theme may also be passed in under the `theme` key but will return an error if no file is present with this name.
 
 **Example**
 ```lua
-config = function()
-  require('color-compiler').load('theme')
-end
+opts = {
+  extenstions = {
+    "harpoon",
+    "telescope",
+    -- ...
+  }
+  theme = "my_theme"
+}
 ```
 
 # Supported Plugins
 
-- aerial
-- cmp
-- dap/dap-ui
-- gitsigns
-- harpoon
-- Heirline
-- illiminate
-- lazy
-- LSP
-- mason
-- neo-tree
-- neotest
-- noice
-- NormalNvim
-- render-markdown
-- snacks
-- telescope
-- treesitter
-- ufo
-- which-key
+Add the corresponding Extension Name to the extenstions key when calling the `setup` function.
+
+| **Plugin**         | **Extension Name**       |
+|--------------------|--------------------------|
+| aerial             | "aerial"                 |
+| cmp                | "cmp"                    |
+| dap/dap-ui         | "dap"                    |
+| gitsigns           | "gitsigns"               |
+| harpoon            | "harpoon"                |
+| Heirline           | "heirline"               |
+| illiminate         | "illiminate"             |
+| lazy               | "lazy"                   |
+| LSP                | "lsp"                    |
+| mason              | "mason"                  |
+| neotest            | "neotest"                |
+| neo-tree           | "neotree"                |
+| noice              | "noice"                  |
+| NormalNvim         | "normalnvim"             |
+| render-markdown    | "render-md"              |
+| Semantic Highlights | "semantic"              |
+| snacks             | "snacks"                 |
+| telescope          | "telescope"              |
+| treesitter         | "treesitter"             |
+| ufo                | "ufo"                    |
+| which-key          | "which-key"              |
 
 > [!NOTE]
 > If a plugin you use is not supported and adding the custom groups to the command is too cumbersome, consider forking and creating a pull request.
 > 
-> Simply update [groups.lua](lua/color-compiler/groups.lua) with the desired groups and I will approve the PR asap
+> Simply update the [extenstions](lua/color-compiler/groups/extenstions) list with the desired plugin and corresponding groups and I will approve the PR asap

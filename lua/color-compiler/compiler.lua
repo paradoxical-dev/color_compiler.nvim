@@ -2,7 +2,12 @@ local M = {}
 
 local fmt = string.format
 local hl_groups = vim.api.nvim_get_hl(0, {}) -- define all global highlight groups
-local group_names = require("color-compiler.groups")
+local config = require("color-compiler.init").config
+
+local syntax = require("color-compiler.groups.syntax")
+local editor = require("color-compiler.groups.editor")
+local group_names = vim.list_extend(vim.deepcopy(syntax), editor)
+-- local group_names = require('color-compiler.groups')
 local terminal_colors = {
 	terminal_color_0 = vim.g.terminal_color_0,
 	terminal_color_1 = vim.g.terminal_color_1,
@@ -54,6 +59,12 @@ end
 --- @param custom_groups? table
 M.compile = function(theme, bg, custom_groups)
 	vim.tbl_deep_extend("keep", group_names, custom_groups or {})
+	if config.extensions then
+		for _, ext in ipairs(config.extensions) do
+			local plugin = require("color-compiler.groups." .. ext)
+			vim.tbl_deep_extend("keep", group_names, plugin)
+		end
+	end
 	local compile_path = vim.env.HOME .. "/.local/share/nvim/color-compiler/"
 	local lines = {
 		string.format(

@@ -1,0 +1,15 @@
+return {
+	"MasonHeader",
+	"MasonHeaderSecondary",
+	"MasonHighlight",
+	"MasonHighlightBlock",
+	"MasonHighlightBlockBold",
+	"MasonHighlightSecondary",
+	"MasonHighlightBlockSecondary",
+	"MasonHighlightBlockBoldSecondary",
+	"MasonMuted",
+	"MasonMutedBlock",
+	"MasonMutedBlockBold",
+	"MasonError",
+	"MasonHeading",
+}

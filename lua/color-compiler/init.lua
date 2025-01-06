@@ -2,6 +2,37 @@ local M = {}
 
 local path = vim.env.HOME .. "/.local/share/nvim/color-compiler/"
 
+M.config = {
+	extenstions = {
+		"lsp",
+		"treesitter",
+		"cmp",
+	},
+}
+
+-- used to define desired plugins and load desired theme if it exists
+--- @param opts table
+M.setup = function(opts)
+	M.config = vim.tbl_deep_extend("force", M.config, opts)
+
+	-- validate config
+	if M.config.extensions and type(M.config.extensions) == "table" then
+		for _, ext in ipairs(M.config.extensions) do
+			if type(ext) ~= "string" then
+				vim.notify("[color-compiler] setup: 'extensions' must contain only strings", vim.log.levels.ERROR)
+				return
+			end
+		end
+	else
+		vim.notify("[color-compiler] setup: 'extensions' must be a table of strings", vim.log.levels.ERROR)
+		M.config.extensions = {}
+	end
+
+	if M.config.theme then
+		M.load(M.config.theme)
+	end
+end
+
 -- main function for loading the compled color scheme into neovim
 --- @param theme string
 M.load = function(theme)
