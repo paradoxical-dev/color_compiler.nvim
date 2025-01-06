@@ -3,7 +3,7 @@ local M = {}
 local path = vim.env.HOME .. "/.local/share/nvim/color-compiler/"
 
 M.config = {
-	extenstions = {
+	extensions = {
 		"lsp",
 		"treesitter",
 		"cmp",

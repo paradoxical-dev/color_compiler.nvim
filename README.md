@@ -101,7 +101,7 @@ Add the corresponding Extension Name to the extenstions key when calling the `se
 | noice              | "noice"                  |
 | NormalNvim         | "normalnvim"             |
 | render-markdown    | "render-md"              |
-| Semantic Highlights | "semantic"              |
+| Semantic Highlights | "semantics"              |
 | snacks             | "snacks"                 |
 | telescope          | "telescope"              |
 | treesitter         | "treesitter"             |
