@@ -16,6 +16,8 @@ return {
 	"SignColumnSB",
 	"Substitute",
 	"LineNr",
+	"LineNrAbove",
+	"LineNrBelow",
 	"CursorLineNr",
 	"MatchParen",
 	"ModeMsg",
