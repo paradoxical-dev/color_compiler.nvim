@@ -10,7 +10,7 @@ A simple utility to precompile your current theme to improve startup times
 
 color-compiler is perfect for those who heavily modify their colorscheme, setting multiple custom overrides of highlight groups.
 
-If this is you, you know that doing this comes with a price... *valuable milliseconds*
+If this is you, you know that doing this comes with a price... _valuable milliseconds_
 
 The goal of this plugin is to precompile your current theme to avoid the tax in startup times.
 
@@ -44,8 +44,8 @@ The :ColorCompiler command provides the base utility for compiling your current 
 
 It takes 2 main arguments:
 
-  - `theme` The name to save the compiled theme under (required)
-  - `bg` The background color (if not provided the current background color will be used)
+- `theme` The name to save the compiled theme under (required)
+- `bg` The background color (if not provided the current background color will be used)
 
 Any further arguments will be passed as group names to include in the compiled theme.
 
@@ -53,6 +53,7 @@ Any further arguments will be passed as group names to include in the compiled t
 > If you need to include custom groups the bg argument cannot be omitted.
 
 **Example**
+
 ```
 :ColorCompiler my_theme dark FzfNormal AlphaHeader
 ```
@@ -69,6 +70,7 @@ The main `setup` function is used to define the used plugins and their hl groups
 The desired theme may also be passed in under the `theme` key but will return an error if no file is present with this name.
 
 **Example**
+
 ```lua
 opts = {
   extenstions = {
@@ -84,31 +86,35 @@ opts = {
 
 Add the corresponding Extension Name to the extenstions key when calling the `setup` function.
 
-| **Plugin**         | **Extension Name**       |
-|--------------------|--------------------------|
-| aerial             | "aerial"                 |
-| cmp                | "cmp"                    |
-| dap/dap-ui         | "dap"                    |
-| gitsigns           | "gitsigns"               |
-| harpoon            | "harpoon"                |
-| Heirline           | "heirline"               |
-| illiminate         | "illiminate"             |
-| lazy               | "lazy"                   |
-| LSP                | "lsp"                    |
-| mason              | "mason"                  |
-| neotest            | "neotest"                |
-| neo-tree           | "neo-tree"                |
-| noice              | "noice"                  |
-| NormalNvim         | "normalnvim"             |
-| render-markdown    | "render-md"              |
-| Semantic Highlights | "semantics"              |
-| snacks             | "snacks"                 |
-| telescope          | "telescope"              |
-| treesitter         | "treesitter"             |
-| ufo                | "ufo"                    |
-| which-key          | "which-key"              |
+| **Plugin**          | **Extension Name** |
+| ------------------- | ------------------ |
+| aerial              | "aerial"           |
+| cmp                 | "cmp"              |
+| dap/dap-ui          | "dap"              |
+| flash.nvim          | "flash"            |
+| vim-flog            | "flog"             |
+| fzf                 | "fzf"              |
+| gitsigns            | "gitsigns"         |
+| harpoon             | "harpoon"          |
+| Heirline            | "heirline"         |
+| illiminate          | "illiminate"       |
+| lazy                | "lazy"             |
+| LSP                 | "lsp"              |
+| markview            | "markview"         |
+| mason               | "mason"            |
+| neotest             | "neotest"          |
+| neo-tree            | "neo-tree"         |
+| noice               | "noice"            |
+| NormalNvim          | "normalnvim"       |
+| render-markdown     | "render-md"        |
+| Semantic Highlights | "semantics"        |
+| snacks              | "snacks"           |
+| telescope           | "telescope"        |
+| treesitter          | "treesitter"       |
+| ufo                 | "ufo"              |
+| which-key           | "which-key"        |
 
 > [!NOTE]
 > If a plugin you use is not supported and adding the custom groups to the command is too cumbersome, consider forking and creating a pull request.
-> 
+>
 > Simply update the [extenstions](lua/color-compiler/groups/extenstions) list with the desired plugin and corresponding groups and I will approve the PR asap
